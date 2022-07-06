@@ -1,14 +1,52 @@
 import pokemonArray from "./data/pokemon.js";
 
+//find types of pokemon
+const types = [];
+pokemonArray.forEach((pokemon) => {
+  pokemon.types.forEach((type) => {
+    if (!types.includes(type)) {
+      types.push(type);
+    }
+  });
+});
+const sortedTypes = types.sort();
+
+//copy pokemon array
 let displayedPokemonArray = [...pokemonArray];
 
-// query selectors
+// query selectors for containers
 const container = document.querySelector(".card-container");
-const nameSearch = document.querySelector("#name-search");
-console.dir(nameSearch);
-const numberSearch = document.querySelector("#number-search");
-console.dir(numberSearch);
+const searchContainer = document.querySelector(".search-container");
 
+// add search section at top of page
+searchContainer.innerHTML = `<label for="name-search">Search by name:</label>
+    <input type="text" id="name-search" name="name-search">
+    <label for="number-search">Number of results:</label>
+    <select id="number-search" name="number-search">
+      <option value="151">All</option>
+      <option value="10">10</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    <fieldset>
+      <legend>Search by type:</legend>
+    </fieldset>`;
+
+//query selector for fieldset
+const fieldset = document.querySelector("fieldset");
+
+sortedTypes.forEach((type) => {
+  const cappedType = `${type[0].toUpperCase()}${type.substring(1)}`;
+  fieldset.innerHTML += ` <input type="checkbox" id="${type}" name="${type}">
+      <label for="${type}les">${cappedType}</label>`;
+});
+
+//query selectors for search elements
+const nameSearch = document.querySelector("#name-search");
+const numberSearch = document.querySelector("#number-search");
+const typeSearch = document.querySelectorAll(`[type="checkbox"]`);
+
+//function to render cards
 const handleRender = () => {
   container.innerHTML = "";
 
@@ -29,19 +67,33 @@ const handleRender = () => {
   });
 };
 
+//function to update displayed array based on searches
 const updateDisplayedArray = () => {
   const inputName = nameSearch.value.toLowerCase();
   const inputNumber = Number(numberSearch.value);
-  console.log(inputName, inputNumber);
+  const inputTypes = [];
+  typeSearch.forEach((type) => {
+    if (type.checked) {
+      inputTypes.push(type.id);
+    }
+  });
   displayedPokemonArray = pokemonArray
     .filter((pokemon) => {
-      return pokemon.name.includes(inputName);
+      return (
+        pokemon.name.includes(inputName) &&
+        inputTypes.every((input) => pokemon.types.includes(input))
+      );
     })
     .slice(0, inputNumber);
   handleRender();
 };
 
+//event listeners
 nameSearch.addEventListener("input", updateDisplayedArray);
 numberSearch.addEventListener("input", updateDisplayedArray);
+typeSearch.forEach((type) => {
+  type.addEventListener("change", updateDisplayedArray);
+});
 
+//render on page load
 handleRender();
