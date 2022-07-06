@@ -32,8 +32,13 @@ searchContainer.innerHTML = `<label for="name-search">Search by name:</label>
       <legend>Search by type:</legend>
     </fieldset>`;
 
+searchContainer.style.marginTop = "1rem";
+
 //query selector for fieldset
 const fieldset = document.querySelector("fieldset");
+
+fieldset.style.marginTop = "1rem";
+fieldset.style.border = "none";
 
 sortedTypes.forEach((type) => {
   const cappedType = `${type[0].toUpperCase()}${type.substring(1)}`;
