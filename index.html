@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="./assets/pokeball.png" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>PokéDom</title>
-  </head>
-  <body>
-    <h1>PokéDom- gotta code 'em all!</h1>
 
-    <main class="card-container"></main>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="./assets/pokeball.png" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PokéDom</title>
+</head>
 
-    <script src="./script.js" type="module"></script>
-  </body>
+<body>
+  <h1>PokéDom- gotta code 'em all!</h1>
+  <label for="name-search">Search by name:</label>
+  <input type="text" id="name-search" name="name-search">
+  <label for="number-search">Number of results:</label>
+  <select id="number-search" name="number-search">
+    <option value="151">All</option>
+    <option value="10">10</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+
+  <main class="card-container"></main>
+
+  <script src="./script.js" type="module"></script>
+</body>
+
 </html>
